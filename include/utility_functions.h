@@ -5,28 +5,10 @@
 #include <fstream>
 #include <numeric>
 
+using ldouble = long double;
+
 // создаёт равномерно распределенную последовательность в указанном интервале.
-template <typename T>
-std::vector<T> linspace(T start, T end, double num){
-    std::vector<T> linspaced;
-    if (0 != num){
-        if (1 == num) {
-            linspaced.push_back(start);
-        }
-        else if(2 == num){
-            linspaced.push_back(start);
-            linspaced.push_back(end);
-        }
-        else{
-            double delta = (end - start) / (num - 1);
-            for (auto i = 0; i < (num - 1); ++i){
-                linspaced.push_back(start + delta * i);
-            }
-            linspaced.push_back(end);
-        }
-    }
-    return linspaced;
-}
+std::vector<ldouble> linspace(ldouble start, ldouble end, ldouble num);
 
 // сохраняет логи в csv формате
 
@@ -61,6 +43,15 @@ void WriteComplexLog(Linspace& x, Container& y, std::string path){
 }
 
 // Z-преобразование
-std::vector<std::complex<double>> z_transform(const std::vector<double>& x, const std::vector<std::complex<double>>& z);
+std::vector<std::complex<ldouble>> z_transform(const std::vector<ldouble>& x, const std::vector<std::complex<ldouble>>& z);
+
+template <typename T>
+std::vector<ldouble> Abs(const std::vector<T>& in){
+    std::vector<ldouble> out(in.size());
+    for(std::size_t i = 0; i < in.size(); ++i){
+        out[i] = std::abs(in[i]);
+    }
+    return out;
+}
 
 #endif // UTILITY_FUNCTIONS_H

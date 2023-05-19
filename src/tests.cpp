@@ -1,8 +1,9 @@
-#include "tests.h"
+#include "../include/tests.h"
+#include "../include/fourier_transform.h"
 
 void TestDft(){
-    std::vector<double> xn = {2, 4, 8, 16};
-    std::vector<std::complex<double>> test = {
+    std::vector<ldouble> xn = {2, 4, 8, 16};
+    std::vector<std::complex<ldouble>> test = {
         {30, 0},
         {-6, -12},
         {-10, 0},
@@ -13,8 +14,8 @@ void TestDft(){
 }
 
 void TestIdft(){
-    std::vector<double> test = {2, 4, 8, 16};
-    std::vector<std::complex<double>> X = {
+    std::vector<ldouble> test = {2, 4, 8, 16};
+    std::vector<std::complex<ldouble>> X = {
         {30, 0},
         {-6, -12},
         {-10, 0},
@@ -26,14 +27,14 @@ void TestIdft(){
 
 void TestDftIdft(){
     {
-        std::vector<double> xn = {2, 4, 8, 16};
+        std::vector<ldouble> xn = {2, 4, 8, 16};
         auto X = Dft(xn.begin(), xn.end());
         auto x = Idft(X.begin(), X.end());
         ASSERT(CheckValues(x, xn));
     }
 
     {
-        std::vector<double> xn = {1, 2, 3, 4, 5, 6, 7, 8};
+        std::vector<ldouble> xn = {1, 2, 3, 4, 5, 6, 7, 8};
         auto X = Dft(xn.begin(), xn.end());
         auto x = Idft(X.begin(), X.end());
         ASSERT(CheckValues(x, xn));
@@ -42,8 +43,8 @@ void TestDftIdft(){
 
 void TestFft(){
     {
-        std::vector<double> xn = {2, 4, 8, 16};
-        std::vector<std::complex<double>> test = {
+        std::vector<ldouble> xn = {2, 4, 8, 16};
+        std::vector<std::complex<ldouble>> test = {
             {30, 0},
             {-6, -12},
             {-10, 0},
@@ -54,40 +55,40 @@ void TestFft(){
     }
 
     {
-        std::vector<double> xn(1000, 1);
+        std::vector<ldouble> xn(1000, 1);
         ASSERT_THROWS(Fft(xn.begin(), xn.end()), std::invalid_argument);
     }
 
     {
-        std::vector<double> xn(100, 1);
+        std::vector<ldouble> xn(100, 1);
         ASSERT_THROWS(Fft(xn.begin(), xn.end()), std::invalid_argument);
     }
 
     {
-        std::vector<double> xn(1, 10);
+        std::vector<ldouble> xn(1, 10);
         ASSERT_DOESNT_THROW(Fft(xn.begin(), xn.end()));
     }
 
     {
-        std::vector<double> xn(2, 10);
+        std::vector<ldouble> xn(2, 10);
         ASSERT_DOESNT_THROW(Fft(xn.begin(), xn.end()));
     }
 
     {
-        std::vector<double> xn(8, 10);
+        std::vector<ldouble> xn(8, 10);
         ASSERT_DOESNT_THROW(Fft(xn.begin(), xn.end()));
     }
 
     {
-        std::vector<double> xn(65536, 10);
+        std::vector<ldouble> xn(65536, 10);
         ASSERT_DOESNT_THROW(Fft(xn.begin(), xn.end()));
     }
 }
 
 void TestIfft(){
     {
-        std::vector<double> test = {2, 4, 8, 16};
-        std::vector<std::complex<double>> X = {
+        std::vector<ldouble> test = {2, 4, 8, 16};
+        std::vector<std::complex<ldouble>> X = {
             {30, 0},
             {-6, -12},
             {-10, 0},
@@ -98,46 +99,46 @@ void TestIfft(){
     }
 
     {
-        std::vector<std::complex<double>> xn(1000, {1, 1});
+        std::vector<std::complex<ldouble>> xn(1000, {1, 1});
         ASSERT_THROWS(Ifft(xn.begin(), xn.end()), std::invalid_argument);
     }
 
     {
-        std::vector<std::complex<double>> xn(100, {1, 1});
+        std::vector<std::complex<ldouble>> xn(100, {1, 1});
         ASSERT_THROWS(Ifft(xn.begin(), xn.end()), std::invalid_argument);
     }
 
     {
-        std::vector<std::complex<double>> xn(1, {1, 1});
+        std::vector<std::complex<ldouble>> xn(1, {1, 1});
         ASSERT_DOESNT_THROW(Ifft(xn.begin(), xn.end()));
     }
 
     {
-        std::vector<std::complex<double>> xn(2, {1, 1});
+        std::vector<std::complex<ldouble>> xn(2, {1, 1});
         ASSERT_DOESNT_THROW(Ifft(xn.begin(), xn.end()));
     }
 
     {
-        std::vector<std::complex<double>> xn(8, {1, 1});
+        std::vector<std::complex<ldouble>> xn(8, {1, 1});
         ASSERT_DOESNT_THROW(Ifft(xn.begin(), xn.end()));
     }
 
     {
-        std::vector<std::complex<double>> xn(65536, {1, 1});
+        std::vector<std::complex<ldouble>> xn(65536, {1, 1});
         ASSERT_DOESNT_THROW(Ifft(xn.begin(), xn.end()));
     }
 }
 
 void TestFftIfft(){
     {
-        std::vector<double> xn = {2, 4, 8, 16};
+        std::vector<ldouble> xn = {2, 4, 8, 16};
         auto X = Fft(xn.begin(), xn.end());
         auto x = Ifft(X.begin(), X.end());
         ASSERT(CheckValues(x, xn));
     }
 
     {
-        std::vector<double> xn = {1, 2, 3, 4, 5, 6, 7, 8};
+        std::vector<ldouble> xn = {1, 2, 3, 4, 5, 6, 7, 8};
         auto X = Fft(xn.begin(), xn.end());
         auto x = Ifft(X.begin(), X.end());
         ASSERT(CheckValues(x, xn));
@@ -229,7 +230,7 @@ void TestBenchmark(){
 
         for(size_t  i = 1, pow_2 = std::pow(2, i); pow_2 <= size; ++i, pow_2 = std::pow(2, i)){
             auto x = linspace(0.0, 50.0, pow_2);
-            std::vector<double> y(pow_2);
+            std::vector<ldouble> y(pow_2);
             for(size_t j = 0; j < pow_2; ++j){
                 y[j] = std::sin(2*x[j]) + std::sin(3*x[j]) + std::sin(5*x[j]);
             }

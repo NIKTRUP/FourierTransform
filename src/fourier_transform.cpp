@@ -1,4 +1,4 @@
-#include "fourier_transform.h"
+#include "../include/fourier_transform.h"
 
 void Normalize(std::vector<int>& x) {
     int carry = 0;
@@ -10,7 +10,7 @@ void Normalize(std::vector<int>& x) {
 }
 
 std::vector<int> Multiply (const std::vector<int> & a, const std::vector<int> & b) {
-    std::vector<std::complex<double>> fa (a.rbegin(), a.rend()), fb (b.rbegin(), b.rend());
+    std::vector<std::complex<ldouble>> fa (a.rbegin(), a.rend()), fb (b.rbegin(), b.rend());
     size_t n = 1;
     for(; n <= std::max(a.size(), b.size()); n <<= 1) {}
     n <<= 1;

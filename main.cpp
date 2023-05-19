@@ -1,7 +1,9 @@
+#define NDEBUG
 #include <cmath>
 #include <iostream>
 #include <random>
-#include "tests.h"
+#include "include/tests.h"
+#include "include/fourier_transform.h"
 
 using namespace std;
 
@@ -56,8 +58,7 @@ void ExampleMultiply(){
         std::vector<int> b = {2,4,8,9};
 
         std::vector<int> test = {3, 0, 7, 1, 4, 2, 6};
-        std::cout << "test 1 = " << test << '\n';
-        std::cout << "result 1 = " << Multiply(a, b) << std::endl;
+        std::cout << "result = " << Multiply(a, b) << std::endl;
     }
 
     {
@@ -65,8 +66,7 @@ void ExampleMultiply(){
         std::vector<int> b = {2,4,8,9};
 
         std::vector<int> test = {3, 0, 7, 2, 6, 7, 0, 5};
-        std::cout << "test 2 = " << test << '\n';
-        std::cout << "result 2 = " << Multiply(a, b) << std::endl;
+        std::cout << "result = " << Multiply(a, b) << std::endl;
     }
 }
 
@@ -75,10 +75,7 @@ int main(){
 #ifndef NDEBUG
     Test();
 #endif
-    //ExampleDft1();
-    //ExampleDft2();
-    //ExampleFft();
-    ExampleMultiply();
+
     return 0;
 }
 
